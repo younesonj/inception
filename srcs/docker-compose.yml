@@ -1,7 +1,7 @@
 
 services:
   nginx:
-    image: nginx:imag
+    image: nginx:img
     container_name: nginx
     build: ./requirements/nginx/.
     restart: always
@@ -15,12 +15,12 @@ services:
       - inception
 
   mariadb:
-    image: mariadb:imag
+    image: mariadb:img
     container_name: mariadb
     build: ./requirements/mariadb/.
     restart: always
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     env_file:
       - .env
     volumes:
@@ -31,12 +31,12 @@ services:
   wordpress:
     depends_on:
       - mariadb
-    image: wordpress:imag
+    image: wordpress:img
     container_name: wordpress
     build: ./requirements/wordpress/.
     restart: always
-    ports:
-      - "9000:9000"
+    expose:
+      - "9000"
     env_file:
       - .env
     volumes:
@@ -50,14 +50,14 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/younesounajjar/data/wordpress-data
+      device: /home/younajja/data/wordpress-data
   mariadb-data:
     driver: local
     name: mariadb-data
     driver_opts:
       o: bind
       type: none
-      device: /Users/younesounajjar/data/mariadb-data
+      device: /home/younajja/data/mariadb-data
 networks:
   inception:
     name: inception

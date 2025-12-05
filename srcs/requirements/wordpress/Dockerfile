@@ -19,7 +19,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 # Stores PHP-FPM’s PID 
 RUN mkdir -p /run/php
 
-COPY /tools/wp-cli.sh ./wp-cli.sh
+COPY tools/wp-cli.sh ./wp-cli.sh
 RUN chmod +x ./wp-cli.sh
 
 EXPOSE 9000

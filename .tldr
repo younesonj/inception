@@ -36,15 +36,15 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -1146.4084885916182,
-			"y": -512.5701694897372,
-			"lastActivityTimestamp": 0,
+			"x": -394.24094828290254,
+			"y": 362.0407281220646,
+			"lastActivityTimestamp": 1764927596455,
 			"meta": {}
 		},
 		{
-			"x": 1146.4084885916182,
-			"y": 512.5701694897372,
-			"z": 0.8977789240820739,
+			"x": 1291.2409482829025,
+			"y": 116.95927187793541,
+			"z": 1,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -132,8 +132,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1092,
-				"h": 687
+				"w": 1506,
+				"h": 934
 			},
 			"insets": [
 				false,
@@ -148,9 +148,9 @@
 			"isChatting": false,
 			"highlightedUserIds": [],
 			"isFocused": true,
-			"devicePixelRatio": 2,
+			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": null,
+			"isHoveringCanvas": true,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,

@@ -18,7 +18,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 
   # Wait for MariaDB to be ready
   echo "Waiting for MariaDB to be ready..."
-  until mysql -u"$WORDPRESS_DB_USER" -p"$WORDPRESS_DB_PASSWORD" -hmariadb -P3306 "$DB_NAME" -e "SELECT 1" 2>/dev/null; do
+  until mysql -u"$WORDPRESS_DB_USER" -p"$WORDPRESS_DB_PASSWORD" -hmariadb -P3306 "$WORDPRESS_DB_NAME" -e "SELECT 1" 2>/dev/null; do
     echo "Waiting for MariaDB..."
     sleep 1
   done

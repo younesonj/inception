@@ -1,14 +1,31 @@
 #!/bin/bash
 set -e
 
-# Start MariaDB in background
-mysqld_safe &
+echo "Starting MariaDB setup..."
 
-# Wait for server to be ready
-sleep 10
+# Initialize database if needed
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+    echo "Database not found. Initializing..."
+    mkdir -p /var/lib/mysql
+    chown -R mysql:mysql /var/lib/mysql
+    mysql_install_db --user=mysql --datadir=/var/lib/mysql
+    echo "Database initialized"
+fi
 
-# Run init script
-./init-db.sh
+chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
-# Bring MariaDB to foreground (so container stays running)
-wait %1
+# Temporary start to configure
+mysqld --user=mysql --bootstrap <<-EOSQL
+    USE mysql;
+    FLUSH PRIVILEGES;
+    CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\`;
+    CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+    GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%';
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
+    FLUSH PRIVILEGES;
+EOSQL
+
+echo "MariaDB setup complete! Starting server..."
+
+# Run MariaDB in foreground (NO background process!)
+exec mysqld --user=mysql
